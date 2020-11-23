@@ -9,7 +9,7 @@ using Oxide.Core.Libraries;
 namespace Oxide.Plugins
 {
     [Info("Phone Rename", "Bazz3l", "0.0.4")]
-    [Description("Ability to rename naughty named phones and changes to discord.")]
+    [Description("Ability to rename naughty named phones and log changes to discord.")]
     public class PhoneRename : CovalencePlugin
     {
         [PluginReference] private Plugin DiscordMessages;
@@ -39,13 +39,6 @@ namespace Oxide.Plugins
                 if (_pluginConfig == null)
                 {
                     throw new JsonException();
-                }
-                
-                if (!_pluginConfig.ToDictionary().Keys.SequenceEqual(Config.ToDictionary(x => x.Key, x => x.Value).Keys))
-                {
-                    PrintWarning($"Configuration file {Name}.json has been updated.");
-                    
-                    SaveConfig();
                 }
             }
             catch
@@ -81,18 +74,13 @@ namespace Oxide.Plugins
             [JsonProperty("WordList (list of ad words)")]
             public List<string> WordList = new List<string>
             {
-                "nigger",
                 "fucker",
-                "sex",
                 "fuck",
                 "cunt",
                 "twat",
-                "wanker"
+                "wanker",
+                "bastard"
             };
-            
-            public Dictionary<string, object> ToDictionary() => JsonConvert.DeserializeObject<Dictionary<string, object>>(ToJson());
-            
-            private string ToJson() => JsonConvert.SerializeObject(this);
         }
 
         #endregion
