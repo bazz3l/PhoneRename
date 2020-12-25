@@ -122,7 +122,7 @@ namespace Oxide.Plugins
                 SendDiscordMessage(player, phoneController.PhoneName, phoneController.PhoneNumber.ToString());
             }
 
-            return null;
+            return true;
         }
         
         private string FilterWord(string phoneName)
